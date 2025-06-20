@@ -1,11 +1,16 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './page/Home';
+import Wrapper from './components/Wrapper';
+import Home from './page/Home/Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Wrapper>
+        <Home />
+      </Wrapper>
+    ),
   }
 ]);
 

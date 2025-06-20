@@ -1,1 +1,21 @@
 @import "tailwindcss";
+body{
+  background-color: black;
+}
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+/* For triangle shape */
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid rgba(59, 130, 246, 0.1);
+}
