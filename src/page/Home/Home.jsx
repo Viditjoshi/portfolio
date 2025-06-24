@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import UserImage from '../../assets/images/user.png';
 import AnimatedButton from '../../components/AnimatedButton';
 import CircularButton from '../../components/CircularButton';
+import ProjectSection from '../../components/ProjectSection';
 
 export default function Home() {
     const [loaded, setLoaded] = useState(false);
@@ -28,8 +29,8 @@ export default function Home() {
         { icon: <SiNodedotjs className="text-green-500" />, name: 'Node.js', color: 'from-green-900/20 to-green-500/10' },
     ];
 
-    return (
-        <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden relative">
+    return (<>
+        <div className="min-h-screen bg-black/10 text-white font-sans overflow-x-hidden relative">
             {/* Scroll Indicator */}
             {!isMobile && (
                 <motion.div 
@@ -48,7 +49,7 @@ export default function Home() {
                 </motion.div>
             )}
 
-            <main className="min-[120vh] flex items-center px-4 sm:px-6 py-16 md:py-0 relative z-10">
+            <main className="min-[120vh] flex items-center px-4 sm:px-6 py-16 md:py-20 relative z-10">
                 <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
                     {/* Text Content */}
                     <div 
@@ -114,8 +115,8 @@ export default function Home() {
                                     className="absolute inset-0 rounded-full bg-gradient-to-t  from-[#3b82f9]/20 to-[3b82f6]/20 blur-3xl"
                                     initial={{ opacity: 0, scale: 1 }}
                                     animate={{
-                                        opacity: hovering ? 0.8 : 0,
-                                        scale: hovering ? 1.1 : 1,
+                                        opacity: hovering ? 1 : 1,
+                                        scale: 1.5,
                                     }}
                                     transition={{ duration: 0.3 }}
                                 />
@@ -130,14 +131,14 @@ export default function Home() {
                                 <img
                                     src={UserImage}
                                     alt="Developer Portrait"
-                                    className={`h-full w-full object-cover grayscale contrast-100 brightness-90 transition-all duration-700 ${hovering ? 'grayscale-0 contrast-100 brightness-100' : ''}`}
+                                    className={`h-full w-full object-cover grayscale contrast-100 brightness-150 transition-all duration-700 ${hovering ? 'grayscale-0 contrast-100 brightness-100' : ''}`}
                                 />
 
                                 {/* Animated scan lines */}
                                 <div className={`absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,transparent_50%,rgba(255,255,255,0.03)_50%,rgba(255,255,255,0.03)_100%)] bg-[length:100%_4px] mix-blend-overlay transition-opacity duration-300 ${hovering ? 'opacity-50' : 'opacity-30'}`} />
 
                                 {/* Digital noise */}
-                                <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cmVjdCB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+')] transition-opacity duration-300 ${hovering ? 'opacity-30' : 'opacity-20'}`} />
+                                <div className={`absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cmVjdCB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+')] transition-opacity duration-300 ${hovering ? 'opacity-0' : 'opacity-20'}`} />
                             </motion.div>
 
                             {/* Floating tech icons - Desktop only */}
@@ -258,5 +259,7 @@ export default function Home() {
                 </div>
             </div>
         </div>
+        <ProjectSection/>
+    </>
     );
 }
