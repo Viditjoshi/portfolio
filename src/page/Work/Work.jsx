@@ -1,8 +1,9 @@
 import React from 'react'
+import ProjectSection from '../../components/ProjectSection'
 
 const Work = () => {
   return (
-    <div>Work</div>
+      <ProjectSection/>
   )
 }
 
