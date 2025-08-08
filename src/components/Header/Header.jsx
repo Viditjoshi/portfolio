@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiCommand, FiSearch } from 'react-icons/fi';
 import { FaHome, FaUser, FaBriefcase, FaBlog, FaEllipsisH } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -82,13 +82,13 @@ const Header = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <a href="/" className="flex items-center">
+              <NavLink to="/" className="flex items-center">
                 <h1 className="text-white font-['Bebas_Neue'] tracking-wider text-3xl leading-none">
                   <span className="text-white">V</span>
                   <span className="text-gray-400">J</span>
                 </h1>
                 <div className="h-1 w-full bg-gradient-to-r from-white to-transparent mt-1 ml-2"></div>
-              </a>
+              </NavLink>
             </motion.div>
 
             {/* Centered Navigation with Enhanced Glass Background */}
@@ -114,37 +114,46 @@ const Header = () => {
                       ref={navRef}
                     >
                       {navItems.map((item) => (
-                        <motion.a
+                        <motion.div
                           key={item.name}
-                          href={item.path}
                           ref={(el) => (linkRefs.current[item.name] = el)}
                           onMouseEnter={() => handleHover(item.name)}
                           onMouseLeave={() => setHoveredLink(null)}
-                          className={`relative px-4 py-2 rounded-full flex text-sm font-medium ${activeLink === item.name ? 'text-white' : 'text-gray-300'
-                            } transition-colors duration-300 z-10`}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          {activeLink === item.name && (
-                            <motion.span
-                              className="absolute inset-0 rounded-full bg-white/20 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.3)]"
-                              layoutId="activeTab"
-                              initial={false}
-                              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                            />
-                          )}
-                          <span className="relative z-10 flex items-center px-2 gap-2">
-                            <motion.span
-                              animate={{
-                                scale: activeLink === item.name ? [1, 1.05, 1] : 1,
-                                textShadow: activeLink === item.name ? '0 0 8px rgba(255, 255, 255, 0.6)' : 'none'
-                              }}
-                              transition={{ duration: 0.5 }}
-                            >
-                              {item.name}
-                            </motion.span>
-                          </span>
-                        </motion.a>
+                          <NavLink
+                            to={item.path}
+                            end
+                            className={({ isActive }) =>
+                              `relative px-4 py-2 rounded-full flex text-sm font-medium ${isActive ? 'text-white' : 'text-gray-300'} transition-colors duration-300 z-10`
+                            }
+                          >
+                            {({ isActive }) => (
+                              <>
+                                {isActive && (
+                                  <motion.span
+                                    className="absolute inset-0 rounded-full bg-white/20 border border-white/30 shadow-[0_0_12px_rgba(255,255,255,0.3)]"
+                                    layoutId="activeTab"
+                                    initial={false}
+                                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                                  />
+                                )}
+                                <span className="relative z-10 flex items-center px-2 gap-2">
+                                  <motion.span
+                                    animate={{
+                                      scale: isActive ? [1, 1.05, 1] : 1,
+                                      textShadow: isActive ? '0 0 8px rgba(255, 255, 255, 0.6)' : 'none'
+                                    }}
+                                    transition={{ duration: 0.5 }}
+                                  >
+                                    {item.name}
+                                  </motion.span>
+                                </span>
+                              </>
+                            )}
+                          </NavLink>
+                        </motion.div>
                       ))}
                     </nav>
                   </div>
@@ -162,41 +171,32 @@ const Header = () => {
                         >
                           <div className="px-4 py-3 border-t border-white/20 mt-2 backdrop-blur-xl bg-white/5 rounded-lg">
                             {navItems.map((item, index) => (
-                              <motion.a
+                              <motion.div
                                 key={item.name}
-                                href={item.path}
-                                className={`block px-4 py-3 rounded-lg text-sm font-medium mb-1 transition-colors duration-300 ${activeLink === item.name
-                                  ? 'bg-white/20 text-white shadow-[0_0_10px_rgba(255,255,255,0.3)]'
-                                  : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                  }`}
-                                onClick={() => setMobileMenuOpen(false)}
                                 initial={{ x: -50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ delay: index * 0.1 }}
-                                whileHover={{
-                                  x: 5,
-                                  backgroundColor: 'rgba(255, 255, 255, 0.15)'
-                                }}
+                                whileHover={{ x: 5 }}
                               >
-                                <div className="flex items-center gap-3">
-                                  <motion.span
-                                    animate={{
-                                      scale: activeLink === item.name ? [1, 1.2, 1] : 1
-                                    }}
-                                    transition={{ duration: 0.3 }}
-                                  >
-                                    {item.icon}
-                                  </motion.span>
-                                  {item.name}
-                                  {activeLink === item.name && (
-                                    <motion.span
-                                      className="ml-auto w-2 h-2 bg-white rounded-full shadow-[0_0_6px_1px_rgba(255,255,255,0.8)]"
-                                      animate={{ scale: [1, 1.5, 1] }}
-                                      transition={{ repeat: Infinity, duration: 1.5 }}
-                                    />
-                                  )}
-                                </div>
-                              </motion.a>
+                                <NavLink
+                                  to={item.path}
+                                  end
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className={({ isActive }) =>
+                                    `block px-4 py-3 rounded-lg text-sm font-medium mb-1 transition-colors duration-300 ${isActive
+                                      ? 'bg-white/20 text-white shadow-[0_0_10px_rgba(255,255,255,0.3)]'
+                                      : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                    }`
+                                  }
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <motion.span>
+                                      {item.icon}
+                                    </motion.span>
+                                    {item.name}
+                                  </div>
+                                </NavLink>
+                              </motion.div>
                             ))}
 
                             {/* Book a Call Button - Mobile */}

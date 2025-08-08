@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0;url=./" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script>
+      // GitHub Pages SPA fallback: redirect to index preserving path
+      const path = window.location.pathname.replace(/^\/[^/]+\//, '/');
+      sessionStorage.setItem('redirect', path + window.location.search + window.location.hash);
+      window.location.replace('./');
+    </script>
+  </body>
+</html>
