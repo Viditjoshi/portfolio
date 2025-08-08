@@ -49,7 +49,7 @@ export default function Home() {
                 </motion.div>
             )}
 
-            <main className="min-[120vh] flex items-center px-4 sm:px-6 py-16 md:py-20 relative z-10">
+            <main className="min-h-[120vh] flex items-center px-4 sm:px-6 py-24 md:py-28 relative z-10">
                 <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
                     {/* Text Content */}
                     <div 
@@ -112,7 +112,7 @@ export default function Home() {
                             {/* Glowing outline effect - Desktop only */}
                             {!isMobile && (
                                 <motion.div
-                                    className="absolute inset-0 rounded-full bg-gradient-to-t  from-[#3b82f9]/20 to-[3b82f6]/20 blur-3xl"
+                                    className="absolute inset-0 rounded-full bg-gradient-to-t from-[#3b82f9]/20 to-[#3b82f6]/20 blur-3xl"
                                     initial={{ opacity: 0, scale: 1 }}
                                     animate={{
                                         opacity: hovering ? 1 : 1,

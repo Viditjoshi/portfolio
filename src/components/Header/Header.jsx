@@ -72,9 +72,9 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed top-5 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-2 bg-black/80 backdrop-blur-md' : 'py-4 bg-transparent'}`}>
+      <header className={`fixed top-0 md:top-5 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-2 bg-black/80 backdrop-blur-md' : 'py-4 bg-transparent'}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start justify-between relative">
+          <div className="flex items-center justify-between relative">
             {/* Logo - Left */}
             <motion.div 
               className="z-50"
@@ -91,8 +91,8 @@ const Header = () => {
               </NavLink>
             </motion.div>
 
-            {/* Centered Navigation with Enhanced Glass Background */}
-            <div className="absolute left-1/2 transform -translate-x-1/2">
+            {/* Centered Navigation with Enhanced Glass Background (desktop only) */}
+            <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
               <motion.div
                 className={`relative bg-white/5 rounded-full`}
 
@@ -157,72 +157,6 @@ const Header = () => {
                       ))}
                     </nav>
                   </div>
-
-                  {/* Mobile Menu */}
-                  {isMobile && (
-                    <AnimatePresence>
-                      {mobileMenuOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                          className="lg:hidden overflow-hidden"
-                        >
-                          <div className="px-4 py-3 border-t border-white/20 mt-2 backdrop-blur-xl bg-white/5 rounded-lg">
-                            {navItems.map((item, index) => (
-                              <motion.div
-                                key={item.name}
-                                initial={{ x: -50, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ x: 5 }}
-                              >
-                                <NavLink
-                                  to={item.path}
-                                  end
-                                  onClick={() => setMobileMenuOpen(false)}
-                                  className={({ isActive }) =>
-                                    `block px-4 py-3 rounded-lg text-sm font-medium mb-1 transition-colors duration-300 ${isActive
-                                      ? 'bg-white/20 text-white shadow-[0_0_10px_rgba(255,255,255,0.3)]'
-                                      : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                    }`
-                                  }
-                                >
-                                  <div className="flex items-center gap-3">
-                                    <motion.span>
-                                      {item.icon}
-                                    </motion.span>
-                                    {item.name}
-                                  </div>
-                                </NavLink>
-                              </motion.div>
-                            ))}
-
-                            {/* Book a Call Button - Mobile */}
-                            <motion.a
-                              href="#contact"
-                              className="block mt-2 px-4 py-3 rounded-lg bg-gradient-to-r from-white to-white/70 text-gray-900 text-sm font-medium text-center hover:shadow-white/20 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
-                              whileTap={{ scale: 0.95 }}
-                              initial={{ y: 20, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: navItems.length * 0.1 }}
-                            >
-                              <motion.span
-                                className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                              />
-                              <span className="relative z-10 flex items-center justify-center gap-2">
-                                <span className="text-gray-800">Book a Call</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-800">
-                                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                                </svg>
-                              </span>
-                            </motion.a>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
                 </div>
               </motion.div>
             </div>
@@ -257,41 +191,107 @@ const Header = () => {
               </motion.button>
 
               {/* Mobile Menu Button */}
-              {isMobile && (
-                <motion.button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="lg:hidden p-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white focus:outline-none"
-                  aria-label="Toggle menu"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <AnimatePresence mode="wait">
-                    {mobileMenuOpen ? (
-                      <motion.span
-                        key="close"
-                        initial={{ rotate: -90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: 90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <FiX className="h-5 w-5" />
-                      </motion.span>
-                    ) : (
-                      <motion.span
-                        key="menu"
-                        initial={{ rotate: 90, opacity: 0 }}
-                        animate={{ rotate: 0, opacity: 1 }}
-                        exit={{ rotate: -90, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <FiMenu className="h-5 w-5" />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </motion.button>
-              )}
+              <motion.button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white focus:outline-none"
+                aria-label="Toggle menu"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <AnimatePresence mode="wait">
+                  {mobileMenuOpen ? (
+                    <motion.span
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FiX className="h-5 w-5" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FiMenu className="h-5 w-5" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </div>
           </div>
+
+          {/* Mobile Menu (below header row) */}
+          {isMobile && (
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="lg:hidden overflow-hidden"
+                >
+                  <div className="px-2">
+                    <div className="px-4 py-3 border border-white/20 mt-3 backdrop-blur-xl bg-white/5 rounded-lg">
+                      {navItems.map((item, index) => (
+                        <motion.div
+                          key={item.name}
+                          initial={{ x: -50, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: index * 0.05 }}
+                          whileHover={{ x: 5 }}
+                        >
+                          <NavLink
+                            to={item.path}
+                            end
+                            onClick={() => setMobileMenuOpen(false)}
+                            className={({ isActive }) =>
+                              `block px-4 py-3 rounded-lg text-sm font-medium mb-1 transition-colors duration-300 ${isActive
+                                ? 'bg-white/20 text-white shadow-[0_0_10px_rgba(255,255,255,0.3)]'
+                                : 'text-gray-300 hover:text-white hover:bg-white/10'
+                              }`
+                            }
+                          >
+                            <div className="flex items-center gap-3">
+                              <motion.span>
+                                {item.icon}
+                              </motion.span>
+                              {item.name}
+                            </div>
+                          </NavLink>
+                        </motion.div>
+                      ))}
+
+                      {/* Book a Call Button - Mobile */}
+                      <motion.a
+                        href="#contact"
+                        className="block mt-2 px-4 py-3 rounded-lg bg-gradient-to-r from-white to-white/70 text-gray-900 text-sm font-medium text-center hover:shadow-white/20 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: navItems.length * 0.05 }}
+                      >
+                        <motion.span
+                          className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        />
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                          <span className="text-gray-800">Book a Call</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-800">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                          </svg>
+                        </span>
+                      </motion.a>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          )}
         </div>
       </header>
 
