@@ -1,54 +1,60 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiChevronRight, FiFilter } from 'react-icons/fi';
+import { FiGithub, FiExternalLink, FiChevronRight } from 'react-icons/fi';
+import hariomimage from '../../assets/screenshot/hariom/harihom.png'
+import hariomimage1 from '../../assets/screenshot/hariom/hariom1.png'
+import hariomimage2 from '../../assets/screenshot/hariom/hariom2.png'
+import hariomimage3 from '../../assets/screenshot/hariom/hariom3.png'
+import vegamovies1 from '../../assets/screenshot/vegamovies/vaga1.png'
+import vegamovies2 from '../../assets/screenshot/vegamovies/vega2.png'
+import vegamovies3 from '../../assets/screenshot/vegamovies/vaga5.png'
+import vegamovies4 from '../../assets/screenshot/vegamovies/vega4.png'
+
 
 const projects = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
+    title: 'Jewellery E-Commerce Platform',
     description: 'Complete shopping experience with AI recommendations and 3D product previews',
     category: 'Web Dev',
     tags: ['React', 'Node.js', 'Three.js'],
-    color: '#3b82f6', // Blue
-    image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a',
-    github: '#',
-    live: '#'
+    color: '#3b82f6',
+    images: [
+      hariomimage,
+      hariomimage1,
+      hariomimage2,
+      hariomimage3
+    ],
+    github: 'https://github.com/Viditjoshi/Full_Stack_Ecommerce_FrontEnd',
+    live: 'https://ecommere-jewellery-site-frontend.vercel.app/'
   },
   {
     id: 2,
-    title: 'AR Interior Design',
-    description: 'Augmented reality app for visualizing furniture in your space',
-    category: 'Mobile',
-    tags: ['ARKit', 'SwiftUI', 'RealityKit'],
-    color: '#3b82f6', // Blue
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace',
-    github: '#',
-    live: '#'
-  },
-  {
-    id: 3,
-    title: 'Neural Style Transfer',
-    description: 'Web-based tool for applying artistic styles to photos using TensorFlow.js',
-    category: 'AI',
-    tags: ['Python', 'TensorFlow', 'Canvas API'],
-    color: '#3b82f6', // Blue
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb',
-    github: '#',
-    live: '#'
+    title: 'VegaMovies Clone',
+    description: 'Movie streaming platform with advanced search, filtering, and responsive design',
+    category: 'Web Dev',
+    tags: ['React', 'Redux', 'API Integration'],
+    color: '#3b82f6',
+    images: [
+      vegamovies1,
+      vegamovies2,
+      vegamovies3,
+      vegamovies4
+    ],
+    github: 'https://github.com/Viditjoshi/vegamoviesClone',
+    live: 'https://vegamoviesclone.vercel.app/vegamovie/'
   }
 ];
 
 const ProjectSection = () => {
   const [expandedProject, setExpandedProject] = useState(null);
   const containerRef = useRef(null);
-
-
+  
   // Parallax effects
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'end start']
   });
-
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
   return (
@@ -56,25 +62,15 @@ const ProjectSection = () => {
       ref={containerRef}
       className="relative py-24 px-4 sm:px-8 overflow-hidden bg-black"
     >
-      
-      {/* <div
-        className="absolute  top-90 h-[100px]  w-[100vw] z-1 blur-3xl"
-        style={{
-          background: "radial-gradient(circle at center, #3e7fee 40%, transparent 80%)",
-          transform: "translateY(100%)"
-        }}
-      />   */}
       <motion.div
         className="absolute mx-auto w-[50%] inset-0 rounded-full bg-gradient-to-t from-[#3e7fee]/50 to-[#000000] blur-3xl"
         initial={{ opacity: 0, scale: 1 }}
         animate={{
-          opacity:  1,
+          opacity: 1,
           scale: 1.5,
         }}
         transition={{ duration: 0.3 }}
       />
-
-
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,9 +86,7 @@ const ProjectSection = () => {
             Projects where I pushed boundaries and solved complex problems
           </p>
         </motion.div>
-
-
-
+        
         {/* Project grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
@@ -106,31 +100,24 @@ const ProjectSection = () => {
             >
               {/* Project card with shadow effect */}
               <div
-                className="h-full rounded-2xl  overflow-hidden border border-gray-800 bg-transparent backdrop-blur-3xl transition-all duration-500 group-hover:border-blue-400/50 group-hover:shadow-lg"
+                className="h-full rounded-2xl overflow-hidden border border-gray-800 bg-transparent backdrop-blur-3xl transition-all duration-500 group-hover:border-blue-400/50 group-hover:shadow-lg"
                 style={{
                   boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
                 }}
               >
-                {/* Color accent */}
-                {/* <div
-                  className="absolute top-0 left-0 w-full h-1"
-                  style={{ background: project.color }}
-                /> */}
-
                 {/* Project image with parallax */}
                 <motion.div
                   className="h-48 overflow-hidden relative"
-
                 >
                   <img
-                    src={`${project.image}?w=800&auto=format`}
+                    src={`${project.images[0]}?w=800&auto=format`}
                     alt={project.title}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.div>
-
+                
                 {/* Project info */}
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-2">
@@ -164,14 +151,12 @@ const ProjectSection = () => {
                       )}
                     </div>
                   </div>
-
                   <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-gray-400 text-sm mb-4 line-clamp-2">
                     {project.description}
                   </p>
-
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map(tag => (
                       <span
@@ -182,7 +167,6 @@ const ProjectSection = () => {
                       </span>
                     ))}
                   </div>
-
                   <button
                     onClick={() => setExpandedProject(project)}
                     className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors"
@@ -195,7 +179,7 @@ const ProjectSection = () => {
           ))}
         </div>
       </div>
-
+      
       {/* Expanded project modal */}
       <AnimatePresence>
         {expandedProject && (
@@ -222,7 +206,7 @@ const ProjectSection = () => {
                   <path d="M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </button>
-
+              
               <div className="p-8">
                 <div className="mb-8">
                   <span
@@ -237,12 +221,16 @@ const ProjectSection = () => {
                   <h3 className="text-3xl font-bold mb-2 text-white">{expandedProject.title}</h3>
                   <p className="text-xl text-gray-400">{expandedProject.description}</p>
                 </div>
-
+                
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                   <div>
                     <h4 className="text-lg font-semibold mb-4 text-white">Project Details</h4>
                     <p className="text-gray-400 mb-6">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      {expandedProject.id === 1
+                        ? 'A full-featured jewellery e-commerce platform with AI-powered recommendations, 3D product visualization, and secure payment processing. Built with modern React patterns and responsive design principles.'
+                        : expandedProject.id === 2
+                          ? 'A movie streaming platform clone featuring advanced search and filtering capabilities, responsive UI, and seamless API integration. Designed to handle large content libraries with smooth user experience.'
+                          : 'An innovative web application that applies artistic styles to photos using neural networks. Built with TensorFlow.js for client-side processing and Canvas API for image manipulation.'}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-8">
                       {expandedProject.tags.map(tag => (
@@ -273,31 +261,19 @@ const ProjectSection = () => {
                       )}
                     </div>
                   </div>
-
-                  <div>
-                    <h4 className="text-lg font-semibold mb-4 text-white">Key Features</h4>
-                    <ul className="space-y-3">
-                      {['Responsive design', 'Performance optimized', 'Accessibility focused', 'Modern animations'].map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <svg className="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.3333 4L6 11.3333L2.66663 8" stroke={expandedProject.color} strokeWidth="2" strokeLinecap="round" />
-                          </svg>
-                          <span className="text-gray-300">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  
                 </div>
-
+                
+                {/* Updated screenshots section */}
                 <div className="space-y-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4 text-white">Screenshots</h4>
                     <div className="grid grid-cols-2 gap-4">
-                      {[1, 2, 3, 4].map(i => (
-                        <div key={i} className="rounded-lg overflow-hidden bg-gray-700 border border-gray-600">
+                      {expandedProject.images.map((img, index) => (
+                        <div key={index} className="rounded-lg overflow-hidden bg-gray-700 border border-gray-600">
                           <img
-                            src={`${expandedProject.image}?w=400&auto=format&fit=crop&crop=entropy&q=80&${i}`}
-                            alt={`Screenshot ${i}`}
+                            src={`${img}?w=400&auto=format&fit=crop&crop=entropy&q=80`}
+                            alt={`Screenshot ${index + 1}`}
                             className="w-full h-auto"
                           />
                         </div>

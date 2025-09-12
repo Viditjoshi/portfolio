@@ -19,7 +19,7 @@ const Header = () => {
     { name: 'Home', path: '/', icon: <FaHome size={14} /> },
     { name: 'About', path: '/about', icon: <FaUser size={14} /> },
     { name: 'Work', path: '/work', icon: <FaBriefcase size={14} /> },
-    { name: 'Blog', path: '/blog', icon: <FaBlog size={14} /> },
+    // { name: 'Blog', path: '/blog', icon: <FaBlog size={14} /> },
   ];
 
   const activeLink = navItems.find(item => location.pathname === item.path)?.name || 'Home';
@@ -72,7 +72,7 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed top-0 md:top-5 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-2 bg-black/80 backdrop-blur-md' : 'py-4 bg-transparent'}`}>
+      <header className={`fixed top-0 md:top-5 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-2  backdrop-blur-md' : 'py-4 bg-transparent'}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between relative">
             {/* Logo - Left */}
@@ -268,7 +268,7 @@ const Header = () => {
                       ))}
 
                       {/* Book a Call Button - Mobile */}
-                      <motion.a
+                      {/* <motion.a
                         href="#contact"
                         className="block mt-2 px-4 py-3 rounded-lg bg-gradient-to-r from-white to-white/70 text-gray-900 text-sm font-medium text-center hover:shadow-white/20 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
                         whileTap={{ scale: 0.95 }}
@@ -285,7 +285,7 @@ const Header = () => {
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                           </svg>
                         </span>
-                      </motion.a>
+                      </motion.a> */}
                     </div>
                   </div>
                 </motion.div>
@@ -363,7 +363,7 @@ const Header = () => {
                     ))}
                   </div>
 
-                  <div className="px-2 py-3">
+                  {/* <div className="px-2 py-3">
                     <h3 className="text-xs uppercase tracking-wider text-white/80 px-4 py-2">Actions</h3>
                     <motion.a
                       href="#contact"
@@ -379,7 +379,7 @@ const Header = () => {
                       Book a Call
                       <span className="ml-auto text-sm text-gray-500">⌘B</span>
                     </motion.a>
-                  </div>
+                  </div> */}
                 </div>
               </motion.div>
             </motion.div>

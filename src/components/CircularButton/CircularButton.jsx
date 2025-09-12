@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const CircularButton = ({
   href = "#",
   size = "md",
   text = "EXPLORE MORE",
   className = "",
-  icon = "arrow", // 'arrow' or 'plus'
+  icon = "arrow",
   glowColor = "#1254A2",
   ...props
 }) => {
@@ -35,6 +36,8 @@ const CircularButton = ({
     )
   };
 
+  const navigate = useNavigate();
+
   return (
     <motion.div
       className={`relative ${sizes[size]} ${className}`}
@@ -42,7 +45,6 @@ const CircularButton = ({
       initial="initial"
       animate="animate"
     >
-      {/* Background particles */}
       <motion.div 
         className="absolute inset-0 overflow-hidden rounded-full"
         variants={{
@@ -77,7 +79,6 @@ const CircularButton = ({
         ))}
       </motion.div>
 
-      {/* Rotating Circular Text */}
       <motion.svg
         className="absolute inset-0 z-[2]"
         viewBox="0 0 100 100"
@@ -118,36 +119,21 @@ const CircularButton = ({
         </text>
       </motion.svg>
 
-      {/* Main Button */}
-      <motion.a
-        href={href}
+      <motion.div
+        onClick={() => navigate(href)}
         className="absolute inset-0 rounded-full border-2 border-white/40 flex items-center justify-center backdrop-blur-md group bg-gradient-to-br from-black/90 to-gray-900/90 hover:from-black/70 hover:to-gray-900/70 transition-all duration-300"
         variants={{
-          initial: { 
-            boxShadow: "0 0 0 0 rgba(255, 255, 255, 0.1)",
-            y: 0
-          },
-          animate: { 
-            y: [0, -4, 0],
-            transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-          },
+          initial: { boxShadow: "0 0 0 0 rgba(255, 255, 255, 0.1)", y: 0 },
+          animate: { y: [0, -4, 0], transition: { duration: 4, repeat: Infinity, ease: "easeInOut" } },
         }}
-        whileTap={{
-          scale: 0.95,
-          boxShadow: "0 0 5px 2px rgba(255, 255, 255, 0.1)"
-        }}
+        whileTap={{ scale: 0.95, boxShadow: "0 0 5px 2px rgba(255, 255, 255, 0.1)" }}
         {...props}
       >
-        {/* Center Icon */}
         <motion.div
           className="text-white z-3"
           variants={{
             initial: { rotate: icon === "arrow" ? 45 : 0, scale: 1 },
-            hover: { 
-              rotate: icon === "arrow" ? 45 : 0, 
-              scale: 1.2,
-              transition: { type: "spring", stiffness: 500 }
-            },
+            hover: { rotate: icon === "arrow" ? 45 : 0, scale: 1.2, transition: { type: "spring", stiffness: 500 } },
           }}
           whileTap={{ rotate: icon === "arrow" ? 95 : 45, scale: 0.9 }}
         >
@@ -157,56 +143,33 @@ const CircularButton = ({
               strokeDasharray="1"
               strokeDashoffset="0"
               initial={{ pathLength: 1 }}
-              whileHover={{
-                pathLength: [1, 0.8, 1],
-                stroke: glowColor
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
+              whileHover={{ pathLength: [1, 0.8, 1], stroke: glowColor }}
+              transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
             >
               {icons[icon]}
             </motion.g>
           </svg>
         </motion.div>
 
-        {/* Pulsing glow effect */}
         <motion.div
           className="absolute inset-0 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`
-          }}
+          style={{ background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)` }}
           variants={{
             initial: { scale: 0.3, opacity: 0 },
-            animate: { 
-              scale: [0.8, 1.2, 0.8],
-              opacity: [0.3, 0.6, 0.3],
-              transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-            },
-            hover: {
-              scale: [1, 1.5, 1],
-              opacity: [0.5, 0.8, 0.5],
-              transition: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-            }
+            animate: { scale: [0.8, 1.2, 0.8], opacity: [0.3, 0.6, 0.3], transition: { duration: 3, repeat: Infinity, ease: "easeInOut" } },
+            hover: { scale: [1, 1.5, 1], opacity: [0.5, 0.8, 0.5], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }
           }}
         />
 
-        {/* Outer ring pulse on hover */}
         <motion.div
           className="absolute inset-0 rounded-full border-2 pointer-events-none"
           style={{ borderColor: glowColor }}
           variants={{
             initial: { scale: 1, opacity: 0 },
-            hover: { 
-              scale: 1.2, 
-              opacity: [0, 0.5, 0],
-              transition: { duration: 2, repeat: Infinity }
-            }
+            hover: { scale: 1.2, opacity: [0, 0.5, 0], transition: { duration: 2, repeat: Infinity } }
           }}
         />
-      </motion.a>
+      </motion.div>
     </motion.div>
   );
 };

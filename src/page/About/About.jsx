@@ -21,24 +21,25 @@ const About = () => {
       duration: "Present",
       logo: VtechLogo,
       description: [
-        "Built and maintained client websites using JavaScript and jQuery",
-        "Assisted in migration from legacy PHP systems to modern stack",
-        "Implemented SEO best practices across 20+ client sites"
+        "Developed responsive web applications using React and Next.js for high performance and SEO optimization.",
+        "Built mobile applications using React Native to enhance client reach on iOS and Android platforms.",
+        "Managed application state effectively using Redux, improving performance and maintainability.",
+        "Created RESTful APIs with Node.js, Express, and Nest.js for scalable backend services.",
       ],
       technologies: [
         { name: "React", icon: <SiReact className="text-yellow-400" /> },
-         { name: "React Native", icon: <SiReact className="text-yellow-400" /> },
+        { name: "React Native", icon: <SiReact className="text-yellow-400" /> },
         { name: "Redux", icon: <SiRedux className="text-indigo-500" /> },
         { name: "Node", icon: <SiNodedotjs className="text-blue-300" /> },
         { name: "Express", icon: <SiExpress className="text-orange-500" /> },
-        
         { name: "Nest", icon: <SiNestjs className="text-indigo-500" /> },
         { name: "Next", icon: <SiNextdotjs className="text-blue-300" /> },
         { name: "Mongodb", icon: <SiMongodb className="text-orange-500" /> },
-         { name: "Sequelize", icon: <SiSequelize className="text-orange-500" /> }
+        { name: "Sequelize", icon: <SiSequelize className="text-orange-500" /> }
       ]
     }
   ];
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -74,12 +75,12 @@ const About = () => {
   };
 
   const accordionVariants = {
-    open: { 
+    open: {
       opacity: 1,
       height: "auto",
       transition: { duration: 0.3 }
     },
-    closed: { 
+    closed: {
       opacity: 0,
       height: 0,
       transition: { duration: 0.3 }
@@ -94,19 +95,19 @@ const About = () => {
       variants={containerVariants}
     >
       {/* Background elements */}
-      <motion.div 
+      <motion.div
         className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-blue-600/20 blur-3xl -z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
         transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
       />
-      <motion.div 
+      <motion.div
         className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-600/20 blur-3xl -z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
         transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
       />
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.h2
           className="text-4xl md:text-5xl font-bold text-white mb-4"
@@ -140,10 +141,10 @@ const About = () => {
                 animate={activeTab === index ? "active" : "inactive"}
                 variants={tabVariants}
               >
-                <img 
-                  src={exp.logo} 
-                  alt={`${exp.company} logo`} 
-                  className="w-20 h-20 rounded-sm object-contain" 
+                <img
+                  src={exp.logo}
+                  alt={`${exp.company} logo`}
+                  className="w-20 h-20 rounded-sm object-contain"
                 />
                 {exp.company}
               </motion.button>
@@ -159,10 +160,10 @@ const About = () => {
             key={activeTab}
           >
             <div className="flex items-start gap-4 mb-6">
-              <img 
-                src={experiences[activeTab].logo} 
-                alt={`${experiences[activeTab].company} logo`} 
-                className="w-16 h-16 rounded-lg object-contain border border-blue-900/50" 
+              <img
+                src={experiences[activeTab].logo}
+                alt={`${experiences[activeTab].company} logo`}
+                className="w-16 h-16 rounded-lg object-contain border border-blue-900/50"
               />
               <div>
                 <motion.h3
@@ -209,14 +210,14 @@ const About = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + i * 0.1 }}
                 >
-                  <button 
+                  <button
                     className="flex items-start text-left"
                     onClick={() => toggleItem(i)}
                   >
                     <span className="text-blue-400 mr-2 mt-1">▹</span>
                     <span className="text-blue-50 flex-1">{item}</span>
                   </button>
-                  
+
                   <motion.div
                     variants={accordionVariants}
                     initial="closed"
@@ -226,7 +227,7 @@ const About = () => {
                     <div className="py-2 text-blue-200 text-sm">
                       {expandedItems[i] && (
                         <p>
-                          More details about this responsibility. Lorem ipsum dolor sit amet, 
+                          More details about this responsibility. Lorem ipsum dolor sit amet,
                           consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
                         </p>
                       )}
@@ -239,14 +240,14 @@ const About = () => {
         </motion.div>
 
         {/* Floating tech icons */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/3 right-10 text-blue-400/20 text-7xl"
           animate={{ rotate: 360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
           <FaReact />
         </motion.div>
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/4 right-20 text-blue-300/20 text-5xl"
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 5, repeat: Infinity }}
