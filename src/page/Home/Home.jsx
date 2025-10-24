@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FiGithub, FiLinkedin, FiMail, FiArrowRight } from 'react-icons/fi';
 import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiReact as SiReactNative, SiNextdotjs } from 'react-icons/si';
 import { motion } from 'framer-motion';
-import UserImage from '../../assets/images/user.png';
+import UserImage from '../../assets/images/me.jpeg';
 import AnimatedButton from '../../components/AnimatedButton';
 import CircularButton from '../../components/CircularButton';
 import { Link } from 'react-router-dom';
@@ -85,7 +85,7 @@ export default function Home() {
                                 <img
                                     src={UserImage}
                                     alt="Developer Portrait"
-                                    className={`h-full w-full object-cover grayscale contrast-100 brightness-150 transition-all duration-700 ${hovering ? 'grayscale-0 contrast-100 brightness-100' : ''}`}
+                                    className={`h-full w-full object-cover  transition-all duration-700`}
                                 />
                             </motion.div>
                             <div className={`absolute z-20 ${isMobile ? '-bottom-6 right-4' : '-bottom-10 right-20'}`}>

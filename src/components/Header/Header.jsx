@@ -9,18 +9,26 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
+
+  const navItems = [
+    { name: 'Home', path: '/', icon: <FaHome size={14} /> },
+    { name: 'Experience', path: '/about', icon: <FaUser size={14} /> },
+    { name: 'Projects', path: '/work', icon: <FaBriefcase size={14} /> },
+    // { name: 'Blog', path: '/blog', icon: <FaBlog size={14} /> },
+  ];
   const [hoveredLink, setHoveredLink] = useState(null);
   const [hoverStyle, setHoverStyle] = useState({ left: 0, width: 0 });
+  const searchData = [...navItems];
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredItems = searchData.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const linkRefs = useRef({});
   const navRef = useRef(null);
   const location = useLocation();
 
-  const navItems = [
-    { name: 'Home', path: '/', icon: <FaHome size={14} /> },
-    { name: 'About', path: '/about', icon: <FaUser size={14} /> },
-    { name: 'Work', path: '/work', icon: <FaBriefcase size={14} /> },
-    // { name: 'Blog', path: '/blog', icon: <FaBlog size={14} /> },
-  ];
 
   const activeLink = navItems.find(item => location.pathname === item.path)?.name || 'Home';
 
@@ -56,6 +64,18 @@ const Header = () => {
       if (e.key === 'Escape') {
         setCommandOpen(false);
       }
+      if (e.metaKey && e.key === 'h') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      if (e.metaKey && e.key === 'e') {
+        e.preventDefault();
+        window.location.href = '/about';
+      }
+      if (e.metaKey && e.key === 'p') {
+        e.preventDefault();
+        window.location.href = '/work';
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -76,7 +96,7 @@ const Header = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between relative">
             {/* Logo - Left */}
-            <motion.div 
+            <motion.div
               className="z-50"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -99,7 +119,7 @@ const Header = () => {
               >
                 {/* Enhanced Glass Background */}
                 <div className={`absolute inset-0 backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 rounded-full border border-white/10`} />
-                
+
                 {/* Subtle Glow Effect */}
                 <div className="absolute inset-0 rounded-full pointer-events-none">
                   <div className="absolute inset-0 rounded-full bg-white/5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]" />
@@ -313,11 +333,8 @@ const Header = () => {
               onClick={(e) => e.stopPropagation()}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             >
-              <motion.div
-                initial={{ y: -10 }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
+              <motion.div initial={{ y: -10 }} animate={{ y: 0 }} transition={{ delay: 0.1 }}>
+                {/* Search Bar */}
                 <div className="flex items-center px-6 py-4 border-b border-white/10">
                   <motion.span>
                     <FiSearch className="text-gray-400 mr-3" />
@@ -325,67 +342,58 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder="Type a command or search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none text-lg"
                     autoFocus
                   />
                   <div className="ml-auto flex items-center gap-2 text-sm text-gray-400">
-                    <motion.span
-                      className="px-2 py-1 bg-white/10 rounded-md"
-                    >
-                      ESC
-                    </motion.span>
+                    <motion.span className="px-2 py-1 bg-white/10 rounded-md">ESC</motion.span>
                   </div>
                 </div>
 
+                {/* Filtered Results */}
                 <div className="divide-y divide-white/10">
                   <div className="px-2 py-3">
-                    <h3 className="text-xs uppercase tracking-wider text-white/80 px-4 py-2">Navigation</h3>
-                    {navItems.map((item) => (
-                      <motion.a
-                        key={item.name}
-                        href={item.path}
-                        className="flex items-center px-6 py-4 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
-                        onClick={() => setCommandOpen(false)}
-                        whileHover={{ x: 5 }}
-                      >
-                        <motion.span
-                          className="mr-4"
-                          animate={{
-                            rotate: [0, 10, -5, 0],
-                            transition: { duration: 0.5 }
-                          }}
-                        >
-                          {item.icon}
-                        </motion.span>
-                        {item.name}
-                        <span className="ml-auto text-sm text-gray-500">⌘{item.name.charAt(0)}</span>
-                      </motion.a>
-                    ))}
-                  </div>
+                    <h3 className="text-xs uppercase tracking-wider text-white/80 px-4 py-2">
+                      Quick Actions & Navigation
+                    </h3>
 
-                  {/* <div className="px-2 py-3">
-                    <h3 className="text-xs uppercase tracking-wider text-white/80 px-4 py-2">Actions</h3>
-                    <motion.a
-                      href="#contact"
-                      className="flex items-center px-6 py-4 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
-                      onClick={() => setCommandOpen(false)}
-                      whileHover={{ x: 5 }}
-                    >
-                      <motion.span
-                        className="mr-4"
-                      >
-                        📅
-                      </motion.span>
-                      Book a Call
-                      <span className="ml-auto text-sm text-gray-500">⌘B</span>
-                    </motion.a>
-                  </div> */}
+                    {filteredItems.length > 0 ? (
+                      filteredItems.map((item) => (
+                        <motion.a
+                          key={item.name}
+                          href={item.path}
+                          className="flex items-center px-6 py-4 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
+                          onClick={() => setCommandOpen(false)}
+                          whileHover={{ x: 5 }}
+                        >
+                          <motion.span
+                            className="mr-4"
+                            animate={{
+                              rotate: [0, 10, -5, 0],
+                              transition: { duration: 0.5 },
+                            }}
+                          >
+                            {item.icon}
+                          </motion.span>
+                          {item.name}
+                          {item.shortcut && (
+                            <span className="ml-auto text-sm text-gray-500">{item.shortcut}</span>
+                          )}
+                        </motion.a>
+                      ))
+                    ) : (
+                      <p className="px-6 py-4 text-gray-400 text-sm">No results found.</p>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </>
   );
 };

@@ -60,10 +60,10 @@ const ProjectSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative py-24 px-4 sm:px-8 overflow-hidden bg-black"
+      className="relative py-24 px-4 sm:px-8 overflow-hidden"
     >
       <motion.div
-        className="absolute mx-auto w-[50%] inset-0 rounded-full bg-gradient-to-t from-[#3e7fee]/50 to-[#000000] blur-3xl"
+        className="absolute mx-auto w-[50%] inset-0 rounded-full "
         initial={{ opacity: 0, scale: 1 }}
         animate={{
           opacity: 1,
